@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joyeras Suárez - Relojeria</title>
+    <link rel="stylesheet" href="estilos.css">
+    <script src="carrito.js"></script>
+    <style>
+        /* Estilos específicos */
+        .productos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            padding: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .producto {
+            background: #FAF0E6;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .producto:hover {
+            transform: translateY(-5px);
+        }
+        
+        .producto-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .producto-info {
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .producto-info h3 {
+            color: #A0522D;
+            margin: 0;
+        }
+        
+        .producto-info .precio {
+            color: #B8860B;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .btn-comprar {
+            background: #DAA520;
+            color: #000;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            transition: background 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .btn-comprar:hover {
+            background: #FFD700;
+        }
+        
+        .banner-categoria {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('Productos/Relojería/relojes425x425_0001_patek-philippe.jpg');
+            background-size: cover;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFF;
+            text-align: center;
+        }
+        
+        .banner-categoria h2 {
+            font-size: 3em;
+            color: #DAA520;
+            margin: 0;
+        }
+
+        /* Estilos del carrito */
+        .carrito-container {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100vh;
+            background: #FAF0E6;
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+            transition: right 0.3s ease;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .carrito-container.abierto {
+            right: 0;
+        }
+
+        .carrito-header {
+            background: #A0522D;
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .carrito-header h2 {
+            margin: 0;
+            font-size: 1.5em;
+        }
+
+        .cerrar-carrito {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+
+        .carrito-items {
+            padding: 15px;
+        }
+
+        .carrito-item {
+            display: flex;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 15px;
+        }
+
+        .carrito-item-img {
+            width: 80px;
+            height: 80px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 5px;
+            margin-right: 15px;
+        }
+
+        .carrito-item-info {
+            flex: 1;
+        }
+
+        .carrito-item-titulo {
+            font-weight: bold;
+            color: #A0522D;
+            margin: 0 0 5px 0;
+        }
+
+        .carrito-item-precio {
+            color: #B8860B;
+            margin: 5px 0;
+        }
+
+        .carrito-item-cantidad {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+        }
+
+        .carrito-item-cantidad button {
+            background: #DAA520;
+            border: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .carrito-item-cantidad input {
+            width: 40px;
+            text-align: center;
+            margin: 0 5px;
+        }
+
+        .eliminar-item {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 3px 8px;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        .carrito-total {
+            padding: 15px;
+            background: #f5f5f5;
+            text-align: right;
+            font-weight: bold;
+            font-size: 1.2em;
+            color: #A0522D;
+        }
+
+        .carrito-acciones {
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btn-vaciar {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-comprar-carrito {
+            background: #DAA520;
+            color: #000;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-comprar-carrito:hover {
+            background: #FFD700;
+        }
+
+        .btn-carrito {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #DAA520;
+            color: #000;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+        }
+
+        .btn-carrito:hover {
+            background: #FFD700;
+        }
+
+        .carrito-contador {
+            background: #A0522D;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+            margin-left: 5px;
+        }
+
+        /* Overlay para cuando el carrito está abierto */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+        }
+
+        .overlay.visible {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <header id="header">
+            <div class="logo">
+                <h1>Joyerias Suárez</h1>
+                <h2>Alta Joyería desde 1950</h2>
+            </div>
+            <nav id="menu">
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="Productos.html">Colecciones</a></li>
+                    <li><a href="AboutUs.html">Sobre Nosotros</a></li>
+                    <li><a href="sucursales.html">Sucursales</a></li>
+                    <li class="auth-buttons">
+                        <a href="login.php" class="btn-login">Iniciar Sesión</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <section class="banner-categoria">
+            <div>
+                <h2>Relojeria</h2>
+                <p>Elegancia y distinción en cada pieza</p>
+            </div>
+        </section>
+
+        <section class="productos-grid">
+            <!-- Producto 1 -->
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/Relojería/relojes280x280_0000_ulysse-nardin1.jpg');"></div>
+                <div class="producto-info">
+                    <h3>Ulysse Nardin</h3>
+                    <p>Reloj clasico chapado en Oro de alrta calidad.</p>
+                    <div class="precio">6,000€</div>
+                    <a href="login.php" class="btn-login">Comprar</a>>
+                </div>
+            </div>
+
+            <!-- Producto 2 -->
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/Relojería/relojes280x280_0002_panerai1.jpg');"></div>
+                <div class="producto-info">
+                    <h3>OFFICINE PANERIA</h3>
+                    <p>Un reloj que representa mas a su portador que nada mas en este mundo.</p>
+                    <div class="precio">2,550€</div>
+                    <a href="login.php" class="btn-login">Comprar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/Relojería/relojes280x280_0003_nomos1.jpg');"></div>
+                <div class="producto-info">
+                    <h3>Nomos</h3>
+                    <p>Reloj de diseño clasico y sencillo pero sin perder la elegancia .</p>
+                    <div class="precio">2,550€</div>
+                    <a href="login.php" class="btn-login">Comprar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/Relojería/relojes280x280_0004_iwc1.jpg');"></div>
+                <div class="producto-info">
+                    <h3>IWC</h3>
+                    <p>Correa de Color negro en piel de alta calidad, y un fondo azul marino.</p>
+                    <div class="precio">10,750€</div>
+                    <a href="login.php" class="btn-login">Comprar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/Relojería/relojes280x280_0005_hublot1.jpg');"></div>
+                <div class="producto-info">
+                    <h3>HUBLOT</h3>
+                    <p>Reloj con muchas funcionalidades y un elegante diseño dorado con correa plastica.</p>
+                    <div class="precio">20,000€</div>
+                    <a href="login.php" class="btn-login">Comprar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/Relojería/relojes280x280_0006_Graham1.jpg');"></div>
+                <div class="producto-info">
+                    <h3>GRAHAM</h3>
+                    <p>Reloj para los amantes del deporte y las actividades de supervivencia.</p>
+                    <div class="precio">1,800€</div>
+                    <a href="login.php" class="btn-login">Comprar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/Relojería/relojes280x280_0007_breguet.jpg');"></div>
+                <div class="producto-info">
+                    <h3>BRAGUET</h3>
+                    <p>Un diseño Elegante y minimalista, para un dia casual de pasear el Poni</p>
+                    <div class="precio">16,000€</div>
+                    <a href="login.php" class="btn-login">Comprar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/Relojería/relojes280x280_0008_alpina.jpg');"></div>
+                <div class="producto-info">
+                    <h3>ALPINA</h3>
+                    <p>Clasico y funcional, para los amantes de vestir camisas y Pantalones de vestir.</p>
+                    <div class="precio">5,730€</div>
+                    <a href="login.php" class="btn-login">Comprar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/Relojería/relojes280x280_zenithOK.jpg');"></div>
+                <div class="producto-info">
+                    <h3>ZENITH</h3>
+                    <p>Un reloj moderno con fint ade ser un reloj barato pero lo que lo hace brillar es su mecanica suiza de accion doble.</p>
+                    <div class="precio">6,300€</div>
+                    <a href="login.php" class="btn-login">Comprar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/Relojería/relojes425x425_0000_luis-erard.jpg');"></div>
+                <div class="producto-info">
+                    <h3>LOUIS ERARD</h3>
+                    <p>Clasicos colores blanco y negro con el cuidado necesario para ser nombrado una de las mejores piezas de mecanica.</p>
+                    <div class="precio">6,800€</div>
+                    <a href="login.php" class="btn-login">Comprar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/Relojería/relojes425x425_0001_patek-philippe.jpg');"></div>
+                <div class="producto-info">
+                    <h3>PATEK PHILIPPE</h3>
+                    <p>Una de las marcas mas reconocidas a nivel mundial por su calidad y diseño de lujo.</p>
+                    <div class="precio">66,200€</div>
+                    <a href="login.php" class="btn-login">Comprar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/Relojería/relojes425x425_0002_bell-ross.jpg');"></div>
+                <div class="producto-info">
+                    <h3>BELL & ROSS</h3>
+                    <p>Minimalista y moderno todo lo necesario para destacar de la sociedad en la que se vive.</p>
+                    <div class="precio">5,000€</div>
+                    <a href="login.php" class="btn-login">Comprar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/Relojería/relojes425x425_0003_A.lange_.jpg');"></div>
+                <div class="producto-info">
+                    <h3>A.LANGE & SOHNE</h3>
+                    <p>Un diseño que mostrara lo mucho qu ese puede lograr con cuero de cocodrilo y la mejor infrestructura del mercado.</p>
+                    <div class="precio">100,000€</div>
+                    <a href="login.php" class="btn-login">Comprar</a>
+                </div>
+            </div>
+        </section>
+
+        <footer id="footer">
+            <p>© 2023 Joyeras Suárez. Todos los derechos reservados.</p>
+            <p><a href="#">Política de privacidad</a> | <a href="#">Términos y condiciones</a></p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Variables
+            const carrito = [];
+            const btnCarrito = document.querySelector('.btn-carrito');
+            const carritoContainer = document.querySelector('.carrito-container');
+            const overlay = document.querySelector('.overlay');
+            const cerrarCarrito = document.querySelector('.cerrar-carrito');
+            const carritoItems = document.getElementById('carrito-items');
+            const carritoTotal = document.getElementById('carrito-total');
+            const contadorCarrito = document.querySelector('.carrito-contador');
+            const btnVaciar = document.getElementById('vaciar-carrito');
+            const btnsComprar = document.querySelectorAll('.btn-comprar');
+
+            // Eventos
+            btnCarrito.addEventListener('click', toggleCarrito);
+            cerrarCarrito.addEventListener('click', toggleCarrito);
+            overlay.addEventListener('click', toggleCarrito);
+            btnVaciar.addEventListener('click', vaciarCarrito);
+
+            // Añadir productos al carrito
+            btnsComprar.forEach(btn => {
+                btn.addEventListener('click', agregarAlCarrito);
+            });
+
+            // Funciones
+            function toggleCarrito() {
+                carritoContainer.classList.toggle('abierto');
+                overlay.classList.toggle('visible');
+            }
+
+            function agregarAlCarrito(e) {
+                const btn = e.target;
+                const id = btn.getAttribute('data-id');
+                const nombre = btn.getAttribute('data-nombre');
+                const precio = parseFloat(btn.getAttribute('data-precio'));
+                const imagen = btn.getAttribute('data-imagen');
+
+                // Verificar si el producto ya está en el carrito
+                const productoExistente = carrito.find(item => item.id === id);
+
+                if (productoExistente) {
+                    productoExistente.cantidad++;
+                } else {
+                    carrito.push({
+                        id,
+                        nombre,
+                        precio,
+                        imagen,
+                        cantidad: 1
+                    });
+                }
+
+                actualizarCarrito();
+                mostrarNotificacion(`${nombre} añadido al carrito`);
+            }
+
+            function actualizarCarrito() {
+                // Limpiar carrito
+                carritoItems.innerHTML = '';
+
+                // Actualizar items
+                let total = 0;
+                let totalItems = 0;
+
+                carrito.forEach(item => {
+                    total += item.precio * item.cantidad;
+                    totalItems += item.cantidad;
+
+                    const itemHTML = document.createElement('div');
+                    itemHTML.classList.add('carrito-item');
+                    itemHTML.innerHTML = `
+                        <div class="carrito-item-img" style="background-image: url('${item.imagen}')"></div>
+                        <div class="carrito-item-info">
+                            <h4 class="carrito-item-titulo">${item.nombre}</h4>
+                            <p class="carrito-item-precio">${item.precio.toLocaleString()}€</p>
+                            <div class="carrito-item-cantidad">
+                                <button class="disminuir" data-id="${item.id}">-</button>
+                                <input type="number" value="${item.cantidad}" min="1" data-id="${item.id}">
+                                <button class="aumentar" data-id="${item.id}">+</button>
+                            </div>
+                            <button class="eliminar-item" data-id="${item.id}">Eliminar</button>
+                        </div>
+                    `;
+                    carritoItems.appendChild(itemHTML);
+                });
+
+                // Actualizar total
+                carritoTotal.textContent = total.toLocaleString();
+                contadorCarrito.textContent = totalItems;
+
+                // Eventos para los botones de cantidad y eliminar
+                document.querySelectorAll('.disminuir').forEach(btn => {
+                    btn.addEventListener('click', disminuirCantidad);
+                });
+
+                document.querySelectorAll('.aumentar').forEach(btn => {
+                    btn.addEventListener('click', aumentarCantidad);
+                });
+
+                document.querySelectorAll('.carrito-item-cantidad input').forEach(input => {
+                    input.addEventListener('change', cambiarCantidad);
+                });
+
+                document.querySelectorAll('.eliminar-item').forEach(btn => {
+                    btn.addEventListener('click', eliminarItem);
+                });
+            }
+
+            function disminuirCantidad(e) {
+                const id = e.target.getAttribute('data-id');
+                const item = carrito.find(item => item.id === id);
+                
+                if (item.cantidad > 1) {
+                    item.cantidad--;
+                } else {
+                    // Si la cantidad es 1, eliminar el producto
+                    eliminarItem(e);
+                    return;
+                }
+                
+                actualizarCarrito();
+            }
+
+            function aumentarCantidad(e) {
+                const id = e.target.getAttribute('data-id');
+                const item = carrito.find(item => item.id === id);
+                item.cantidad++;
+                actualizarCarrito();
+            }
+
+            function cambiarCantidad(e) {
+                const id = e.target.getAttribute('data-id');
+                const nuevaCantidad = parseInt(e.target.value);
+                
+                if (nuevaCantidad < 1) {
+                    e.target.value = 1;
+                    return;
+                }
+                
+                const item = carrito.find(item => item.id === id);
+                item.cantidad = nuevaCantidad;
+                actualizarCarrito();
+            }
+
+            function eliminarItem(e) {
+                const id = e.target.getAttribute('data-id');
+                const index = carrito.findIndex(item => item.id === id);
+                
+                if (index !== -1) {
+                    carrito.splice(index, 1);
+                    actualizarCarrito();
+                }
+            }
+
+            function vaciarCarrito() {
+                carrito.length = 0;
+                actualizarCarrito();
+                mostrarNotificacion('Carrito vaciado');
+            }
+
+            function mostrarNotificacion(mensaje) {
+                const notificacion = document.createElement('div');
+                notificacion.style.position = 'fixed';
+                notificacion.style.bottom = '20px';
+                notificacion.style.right = '20px';
+                notificacion.style.backgroundColor = '#A0522D';
+                notificacion.style.color = 'white';
+                notificacion.style.padding = '10px 20px';
+                notificacion.style.borderRadius = '5px';
+                notificacion.style.boxShadow = '0 2px 10px rgba(0,0,0,0.2)';
+                notificacion.style.zIndex = '1000';
+                notificacion.textContent = mensaje;
+                
+                document.body.appendChild(notificacion);
+                
+                setTimeout(() => {
+                    notificacion.style.opacity = '0';
+                    notificacion.style.transition = 'opacity 0.5s';
+                    setTimeout(() => {
+                        document.body.removeChild(notificacion);
+                    }, 500);
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>

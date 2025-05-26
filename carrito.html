@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras - Joyerías Suárez</title>
+    <link rel="stylesheet" href="estilos.css">
+    <style>
+        .carrito-container {
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        
+        .carrito-item {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #DAA520;
+            padding-bottom: 20px;
+        }
+        
+        .carrito-item-img {
+            width: 120px;
+            height: 120px;
+            background-size: cover;
+            background-position: center;
+            margin-right: 20px;
+            border-radius: 5px;
+        }
+        
+        .carrito-item-info {
+            flex: 1;
+        }
+        
+        .carrito-item-titulo {
+            font-size: 1.3em;
+            color: #A0522D;
+            margin: 0 0 10px 0;
+        }
+        
+        .carrito-item-precio {
+            font-weight: bold;
+            color: #B8860B;
+            margin-bottom: 10px;
+        }
+        
+        .carrito-item-cantidad {
+            display: flex;
+            align-items: center;
+        }
+        
+        .carrito-item-cantidad button {
+            background: #DAA520;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 1.1em;
+        }
+        
+        .carrito-item-cantidad input {
+            width: 50px;
+            text-align: center;
+            margin: 0 10px;
+            padding: 5px;
+        }
+        
+        .eliminar-item {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        
+        .carrito-total {
+            text-align: right;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #A0522D;
+            margin: 30px 0;
+        }
+        
+        .carrito-acciones {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .btn-vaciar {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .btn-comprar {
+            background: #DAA520;
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .btn-comprar:hover {
+            background: #FFD700;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <header id="header">
+            <div class="logo">
+                <h1>Joyerias Suárez</h1>
+                <h2>Carrito de Compras</h2>
+            </div>
+            <nav id="menu">
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="Productos.html">Productos</a></li>
+                    <li><a href="AboutUs.html">Sobre Nosotros</a></li>
+                    <li><a href="sucursales.html">Sucursales</a></li>
+                    <li class="auth-buttons">
+                        <a href="login.php" class="btn-login">Iniciar Sesión</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <div class="carrito-container">
+            <h1>Tu Carrito de Compras</h1>
+            
+            <div id="carrito-items">
+                <!-- Los items se cargarán aquí con JavaScript -->
+            </div>
+            
+            <div class="carrito-total">
+                Total: <span id="carrito-total">0</span>€
+            </div>
+            
+            <div class="carrito-acciones">
+                <button class="btn-vaciar" id="vaciar-carrito">Vaciar Carrito</button>
+                <button class="btn-comprar">Finalizar Compra</button>
+            </div>
+        </div>
+
+        <footer id="footer">
+            <p>© 2023 Joyeras Suárez. Todos los derechos reservados.</p>
+            <p><a href="#">Política de privacidad</a> | <a href="#">Términos y condiciones</a></p>
+        </footer>
+    </div>
+
+    <script src="carrito.js"></script>
+    <script>
+        // Código específico para la página del carrito
+        document.addEventListener('DOMContentLoaded', function() {
+            const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+            const carritoItems = document.getElementById('carrito-items');
+            const carritoTotal = document.getElementById('carrito-total');
+            const btnVaciar = document.getElementById('vaciar-carrito');
+            
+            // Renderizar carrito
+            function renderizarCarrito() {
+                carritoItems.innerHTML = '';
+                let total = 0;
+                
+                if (carrito.length === 0) {
+                    carritoItems.innerHTML = '<p>Tu carrito está vacío</p>';
+                    carritoTotal.textContent = '0';
+                    return;
+                }
+                
+                carrito.forEach(item => {
+                    const subtotal = item.precio * item.cantidad;
+                    total += subtotal;
+                    
+                    const itemHTML = document.createElement('div');
+                    itemHTML.className = 'carrito-item';
+                    itemHTML.innerHTML = `
+                        <div class="carrito-item-img" style="background-image: url('${item.imagen}')"></div>
+                        <div class="carrito-item-info">
+                            <h3 class="carrito-item-titulo">${item.nombre}</h3>
+                            <p class="carrito-item-precio">${item.precio.toLocaleString()}€</p>
+                            <div class="carrito-item-cantidad">
+                                <button class="disminuir" data-id="${item.id}">-</button>
+                                <input type="number" value="${item.cantidad}" min="1" data-id="${item.id}">
+                                <button class="aumentar" data-id="${item.id}">+</button>
+                            </div>
+                            <p>Subtotal: ${subtotal.toLocaleString()}€</p>
+                            <button class="eliminar-item" data-id="${item.id}">Eliminar</button>
+                        </div>
+                    `;
+                    carritoItems.appendChild(itemHTML);
+                });
+                
+                carritoTotal.textContent = total.toLocaleString();
+                
+                // Event listeners para los controles
+                document.querySelectorAll('.disminuir').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = this.getAttribute('data-id');
+                        const item = carrito.find(i => i.id === id);
+                        
+                        if (item.cantidad > 1) {
+                            item.cantidad--;
+                        } else {
+                            carrito.splice(carrito.indexOf(item), 1);
+                        }
+                        
+                        localStorage.setItem('carrito', JSON.stringify(carrito));
+                        renderizarCarrito();
+                    });
+                });
+                
+                document.querySelectorAll('.aumentar').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = this.getAttribute('data-id');
+                        const item = carrito.find(i => i.id === id);
+                        item.cantidad++;
+                        localStorage.setItem('carrito', JSON.stringify(carrito));
+                        renderizarCarrito();
+                    });
+                });
+                
+                document.querySelectorAll('.eliminar-item').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = this.getAttribute('data-id');
+                        const index = carrito.findIndex(i => i.id === id);
+                        carrito.splice(index, 1);
+                        localStorage.setItem('carrito', JSON.stringify(carrito));
+                        renderizarCarrito();
+                    });
+                });
+            }
+            
+            // Vaciar carrito
+            btnVaciar.addEventListener('click', function() {
+                localStorage.removeItem('carrito');
+                renderizarCarrito();
+                alert('Carrito vaciado');
+            });
+            
+            // Inicializar
+            renderizarCarrito();
+        });
+    </script>
+</body>
+</html>

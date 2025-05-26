@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joyeras Suárez - Solitarios Y Alinzas</title>
+    <link rel="stylesheet" href="estilos.css">
+    <script src="carrito.js"></script>
+    <style>
+        /* Estilos específicos */
+        .productos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            padding: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .producto {
+            background: #FAF0E6;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .producto:hover {
+            transform: translateY(-5px);
+        }
+        
+        .producto-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .producto-info {
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .producto-info h3 {
+            color: #A0522D;
+            margin: 0;
+        }
+        
+        .producto-info .precio {
+            color: #B8860B;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .btn-comprar {
+            background: #DAA520;
+            color: #000;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            transition: background 0.3s;
+        }
+        
+        .btn-comprar:hover {
+            background: #FFD700;
+        }
+        
+        .banner-categoria {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('Productos/SolitariosYAlianzas/al12014-obd110b.png');
+            background-size: cover;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFF;
+            text-align: center;
+        }
+        
+        .banner-categoria h2 {
+            font-size: 3em;
+            color: #DAA520;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <header id="header">
+            <div class="logo">
+                <h1>Joyerias Suárez</h1>
+                <h2>Alta Joyería desde 1950</h2>
+            </div>
+            <nav id="menu">
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="Productos.html">Colecciones</a></li>
+                    <li><a href="AboutUs.html">Sobre Nosotros</a></li>
+                    <li><a href="sucursales.html">Sucursales</a></li>
+                    <li class="auth-buttons">
+                        <a href="login.php" class="btn-login">Iniciar Sesión</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <section class="banner-categoria">
+            <div>
+                <h2>Solitarios Y Alianzas</h2>
+                <p>Elegancia y distinción en cada pieza</p>
+            </div>
+        </section>
+
+        <section class="productos-grid">
+            <!-- Producto 1 -->
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/SolitariosYAlianzas/al8016-obt-st-.jpg');"></div>
+                <div class="producto-info">
+                    <h3>Anillo de Plata</h3>
+                    <p>Diseño clásico con nuestra marca en ella.</p>
+                    <div class="precio">1,200€</div>
+                    <a href="login.php" class="btn-comprar">Comprar</a>
+                </div>
+            </div>
+
+            <!-- Producto 2 -->
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/SolitariosYAlianzas/al8018-0at2.jpg');"></div>
+                <div class="producto-info">
+                    <h3>Anillo de Oro</h3>
+                    <p>Las mejores piezas en oro con nuestro sello.</p>
+                    <div class="precio">2,500€</div>
+                    <a href="login.php" class="btn-comprar">Comprar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/SolitariosYAlianzas/al9007-00d.jpg');"></div>
+                <div class="producto-info">
+                    <h3>Anillo de Plata con MiniDiamantes</h3>
+                    <p>Un aro de plata recubierto con diamantes.</p>
+                    <div class="precio">4,700€</div>
+                    <a href="login.php" class="btn-comprar">Comprar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/SolitariosYAlianzas/al9007-00d.jpg');"></div>
+                <div class="producto-info">
+                    <h3>Anillo de Plata con MiniDiamantes</h3>
+                    <p>Un aro de plata recubierto con diamantes.</p>
+                    <div class="precio">7,700€</div>
+                    <a href="login.php" class="btn-comprar">Comprar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/SolitariosYAlianzas/al-9825-obdc-st.jpg');"></div>
+                <div class="producto-info">
+                    <h3>Anillo de Plata con Diamantes</h3>
+                    <p>Un aro de plata recubierto con diamantes de tamaño medio.</p>
+                    <div class="precio">9,00€</div>
+                    <a href="login.php" class="btn-comprar">Comprar</a>
+                </div>
+            </div>
+
+             <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/SolitariosYAlianzas/AL9915-00D.jpg');"></div>
+                <div class="producto-info">
+                    <h3>Anillo de Plata con Diamantes Grandes</h3>
+                    <p>Un aro de plata recubierto con diamantes de tamaño Grande.</p>
+                    <div class="precio">11,00€</div>
+                    <a href="login.php" class="btn-comprar">Comprar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/SolitariosYAlianzas/al12003-0bd.png');"></div>
+                <div class="producto-info">
+                    <h3>Anillo de Plata con Diamantes Cuadrados</h3>
+                    <p>Un aro de plata recubierto con diamantes Cuadrados.</p>
+                    <div class="precio">8,00€</div>
+                    <a href="login.php" class="btn-comprar">Comprar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/SolitariosYAlianzas/al12010-obd-t.jpg');"></div>
+                <div class="producto-info">
+                    <h3>Anillo de Plata con recubrimiento en Diamantes</h3>
+                    <p>Un aro de plata recubierto.</p>
+                    <div class="precio">8,00€</div>
+                    <a href="login.php" class="btn-comprar">Comprar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/SolitariosYAlianzas/al12014-obd110b.png');"></div>
+                <div class="producto-info">
+                    <h3>Anillo de Plata con recubrimiento en Diamantes en gota</h3>
+                    <p>Un aro de plata recubierto de diamantes en gota.</p>
+                    <div class="precio">15,00€</div>
+                    <a href="login.php" class="btn-comprar">Comprar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/SolitariosYAlianzas/sl12001-obd54mm.jpg');"></div>
+                <div class="producto-info">
+                    <h3>Anillo de Plata con Diamante de alto valor</h3>
+                    <p>Un aro de plata con Un diamante de gran tamaño en uno de los costados</p>
+                    <div class="precio">6,00€</div>
+                    <a href="login.php" class="btn-comprar">Comprar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/SolitariosYAlianzas/sl12004-p_1.jpg');"></div>
+                <div class="producto-info">
+                    <h3>Anillo de estilo compromiso</h3>
+                    <p>Un aro de plata con Un diamante elegantemente posicionado.</p>
+                    <div class="precio">4,00€</div>
+                    <a href="login.php" class="btn-comprar">Comprar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/SolitariosYAlianzas/sl13005.png');"></div>
+                <div class="producto-info">
+                    <h3>Anillo femenino con una piedra dorada</h3>
+                    <p>Un aro de plata con Un diamante color ambar cuadrado.</p>
+                    <div class="precio">2,00€</div>
+                    <a href="login.php" class="btn-comprar">Comprar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/SolitariosYAlianzas/so13009-oad-.jpg');"></div>
+                <div class="producto-info">
+                    <h3>Anillo femenino en Oro</h3>
+                    <p>Un aro de oro elegante para cada ocacion </p>
+                    <div class="precio">5,00€</div>
+                    <a href="login.php" class="btn-comprar">Comprar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/SolitariosYAlianzas/SO13009-OBD.jpg');">
+                </div>
+                <div class="producto-info">
+                    <h3>Anillo femenino en plata</h3>
+                    <p>Un aro de plata elegante para cada ocacion </p>
+                    <div class="precio">6,00€</div>
+                    <a href="login.php" class="btn-comprar">Comprar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/SolitariosYAlianzas/so13010-oad-st.jpg');">
+                </div>
+                <div class="producto-info">
+                    <h3>Anillo femenino en Oro con 3 diamantes</h3>
+                    <p>Un aro de oro con 3 diamantes de alta calidad elegante para cada ocacion </p>
+                    <div class="precio">10,00€</div>
+                    <a href="login.php" class="btn-comprar">Comprar</a>
+                </div>
+            </div>
+
+
+            <!-- Añade más productos aquí -->
+        </section>
+
+        <footer id="footer">
+            <p>© 2023 Joyeras Suárez. Todos los derechos reservados.</p>
+            <p><a href="login.php">Política de privacidad</a> | <a href="login.php">Términos y condiciones</a></p>
+        </footer>
+    </div>
+</body>
+</html>

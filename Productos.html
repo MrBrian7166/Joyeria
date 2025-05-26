@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joyeras Suárez - Nuestras Colecciones</title>
+    <link rel="stylesheet" href="estilos.css">
+    <script src="carrito.js"></script>
+    <style>
+        /* Estilos específicos para Productos */
+        .categorias {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        
+        .categoria {
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+        
+        .categoria:hover {
+            transform: translateY(-10px);
+        }
+        
+        .categoria img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.7);
+        }
+        
+        .categoria-contenido {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: #FFF;
+        }
+        
+        .categoria h3 {
+            font-size: 1.8em;
+            margin: 0;
+            color: #DAA520;
+        }
+        
+        .categoria p {
+            margin: 10px 0 0;
+            font-size: 0.9em;
+        }
+        
+        .btn-categoria {
+            display: inline-block;
+            background: #B8860B;
+            color: #000;
+            padding: 8px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: background 0.3s;
+        }
+        
+        .btn-categoria:hover {
+            background: #FFD700;
+        }
+        
+        .banner-productos {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('Instalaciones/Barcelona.jpg');
+            background-size: cover;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFF;
+            text-align: center;
+        }
+        
+        .banner-productos h2 {
+            font-size: 3em;
+            color: #DAA520;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <!-- Header consistente -->
+        <header id="header">
+            <div class="logo">
+                <h1>Joyerias Suárez</h1>
+                <h2>Alta Joyería desde 1950</h2>
+            </div>
+            <nav id="menu">
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="Productos.html" class="active">Colecciones</a></li>
+                    <li><a href="AboutUs.html">Sobre Nosotros</a></li>
+                    <li><a href="sucursales.html">Sucursales</a></li>
+                    <li class="auth-buttons">
+                        <a href="login.php" class="btn-login">Iniciar Sesión</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Banner de colecciones -->
+        <section class="banner-productos">
+            <div>
+                <h2>Nuestras Colecciones</h2>
+                <p>Descubre piezas únicas diseñadas con maestría</p>
+            </div>
+        </section>
+
+        <!-- Menú de categorías -->
+        <section class="categorias">
+            <!-- Colecciones -->
+            <div class="categoria">
+                <img src="Productos/Colecciones/so15009-ob.jpg" alt="Colecciones">
+                <div class="categoria-contenido">
+                    <h3>Colecciones</h3>
+                    <p>Aretes, anillos y collares de mujer con diseños clásicos y modernos.</p>
+                    <a href="Colecciones.html" class="btn-categoria">Explorar</a>
+                </div>
+            </div>
+
+            <!-- Joyas -->
+            <div class="categoria">
+                <img src="Productos/Joyas/so13097_st.jpg" alt="Joyas">
+                <div class="categoria-contenido">
+                    <h3>Joyas</h3>
+                    <p>Aretes con piedras brillantes y diseños extravagantes para ocasiones especiales.</p>
+                    <a href="Joyas.html" class="btn-categoria">Explorar</a>
+                </div>
+            </div>
+
+            <!-- Relojería -->
+            <div class="categoria">
+                <img src="Productos/Relojería/relojes425x425_0001_patek-philippe.jpg" alt="Relojería">
+                <div class="categoria-contenido">
+                    <h3>Relojería</h3>
+                    <p>Relojes finos y elegantes para hombre, combinando precisión y lujo.</p>
+                    <a href="Relojeria.html" class="btn-categoria">Explorar</a>
+                </div>
+            </div>
+
+            <!-- Solitarios y Alianzas -->
+            <div class="categoria">
+                <img src="Productos/SolitariosYAlianzas/al12014-obd110b.png" alt="Solitarios y Alianzas">
+                <div class="categoria-contenido">
+                    <h3>Solitarios y Alianzas</h3>
+                    <p>Anillos en oro, plata y con piedras preciosas para momentos inolvidables.</p>
+                    <a href="Solitarios.html" class="btn-categoria">Explorar</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer id="footer">
+            <p>© 2023 Joyeras Suárez. Todos los derechos reservados.</p>
+            <p><a href="#">Política de privacidad</a> | <a href="#">Términos y condiciones</a></p>
+        </footer>
+    </div>
+</body>
+</html>

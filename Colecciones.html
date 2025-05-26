@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joyeras Suárez - Colecciones</title>
+    <link rel="stylesheet" href="estilos.css">
+    <style>
+        /* Estilos específicos */
+        .productos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            padding: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .producto {
+            background: #FAF0E6;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .producto:hover {
+            transform: translateY(-5px);
+        }
+        
+        .producto-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .producto-info {
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .producto-info h3 {
+            color: #A0522D;
+            margin: 0;
+        }
+        
+        .producto-info .precio {
+            color: #B8860B;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .btn-comprar {
+            background: #DAA520;
+            color: #000;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-comprar:hover {
+            background: #FFD700;
+        }
+        
+        .banner-categoria {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('Productos/Colecciones/pe15008-obagd.jpg');
+            background-size: cover;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFF;
+            text-align: center;
+        }
+        
+        .banner-categoria h2 {
+            font-size: 3em;
+            color: #DAA520;
+            margin: 0;
+        }
+
+        /* Estilos del carrito */
+        .btn-carrito {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #DAA520;
+            color: #000;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+        }
+
+        .btn-carrito:hover {
+            background: #FFD700;
+        }
+
+        .carrito-contador {
+            background: #A0522D;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+            margin-left: 5px;
+        }
+
+        .carrito-container {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 350px;
+            height: 100vh;
+            background: #FAF0E6;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+            transition: right 0.3s;
+            z-index: 1000;
+            padding: 20px;
+            border-left: 1px solid #DAA520;
+        }
+
+        .carrito-container.abierto {
+            right: 0;
+        }
+
+        .carrito-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #DAA520;
+        }
+
+        .carrito-item {
+            display: flex;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #DAA520;
+        }
+
+        .carrito-item-img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            margin-right: 10px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .carrito-item-info {
+            flex-grow: 1;
+        }
+
+        .carrito-item-titulo {
+            font-weight: bold;
+            color: #A0522D;
+            margin: 0 0 5px 0;
+        }
+
+        .carrito-item-precio {
+            color: #B8860B;
+            margin: 5px 0;
+        }
+
+        .carrito-item-cantidad {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+        }
+
+        .carrito-item-cantidad button {
+            background: #DAA520;
+            border: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .carrito-item-cantidad input {
+            width: 40px;
+            text-align: center;
+            margin: 0 5px;
+        }
+
+        .eliminar-item {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 3px 8px;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        .carrito-total {
+            position: absolute;
+            bottom: 70px;
+            width: calc(100% - 40px);
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .carrito-acciones {
+            position: absolute;
+            bottom: 20px;
+            width: calc(100% - 40px);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btn-vaciar {
+            background: #ff6b6b;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-comprar-carrito {
+            background: #DAA520;
+            color: #000;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+        }
+
+        .overlay.visible {
+            display: block;
+        }
+
+        /* Notificaciones */
+        .notificacion-carrito {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #A0522D;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            z-index: 1000;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .notificacion-carrito.mostrar {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <header id="header">
+            <div class="logo">
+                <h1>Joyerias Suárez</h1>
+                <h2>Alta Joyería desde 1950</h2>
+            </div>
+            <nav id="menu">
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="Productos.html">Colecciones</a></li>
+                    <li><a href="AboutUs.html">Sobre Nosotros</a></li>
+                    <li><a href="sucursales.html">Sucursales</a></li>
+                    <li class="auth-buttons">
+                        <a href="login.php" class="btn-login">Iniciar Sesión</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <section class="banner-categoria">
+            <div>
+                <h2>Colecciones </h2>
+                <p>Elegancia y distinción en cada pieza</p>
+            </div>
+        </section>
+
+        <section class="productos-grid">
+            <!-- Producto 1 -->
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/Colecciones/co2040-00cr.jpg');"></div>
+                <div class="producto-info">
+                    <h3>Pulsera Roja</h3>
+                    <p>Pulsera de piedra exotica rojiZa.</p>
+                    <div class="precio">1,200€</div>
+             <a href="login.php" class="btn-login">Comprar</a>
+                </div>
+            </div>
+
+            <!-- Producto 2 -->
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/Colecciones/pe6088-00p.jpg');"></div>
+                <div class="producto-info">
+                    <h3>Aretes de Perlas</h3>
+                    <p>Perlas australianas con cierre plateado.</p>
+                    <div class="precio">2,500€</div>
+                <a href="login.php" class="btn-login">Comprar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/Colecciones/pe13078-or.jpg');"></div>
+                <div class="producto-info">
+                    <h3>Aretes Opalo Naranja</h3>
+                    <p>Diseño único y pendientes en oro de la mas alta calidad.</p>
+                    <div class="precio">2,700€</div>
+                    <a href="login.php" class="btn-login">Comprar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/Colecciones/pe15007-ortrrd.png');"></div>
+                <div class="producto-info">
+                    <h3>Aretes Diamante Rosa</h3>
+                    <p>Diamantes Rosas únicos en el mercado.</p>
+                    <div class="precio">3,000€</div>
+                    <a href="login.php" class="btn-login">Comprar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/Colecciones/pe15008-obagd.jpg');"></div>
+                <div class="producto-info">
+                    <h3>Lapiz lazuli Claro</h3>
+                    <p>Una piedra unica en su especie y muy extraña en la categoria de piedras extravagantes.</p>
+                    <div class="precio">1,900€</div>
+                    <a href="login.php" class="btn-login">Comprar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/Colecciones/pe15019-oronpa.jpg');"></div>
+                <div class="producto-info">
+                    <h3>Saturno</h3>
+                    <p>Un par de pendientes con alusion al planeta saturno conformado por perlas y diseños en oro.</p>
+                    <div class="precio">5,000€</div>
+                    <a href="login.php" class="btn-login">Comprar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/Colecciones/pe15046-ztrv.jpg');"></div>
+                <div class="producto-info">
+                    <h3>Pendientes de Esmeraldas </h3>
+                    <p>Aretes con una piedra muy valorada en el mercado, extravagante diseño y una imagen de alta calidad</p>
+                    <div class="precio">3,000€</div>
+                    <a href="login.php" class="btn-login">Comprar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/Colecciones/PU15014-ORSAV.jpg');"></div>
+                <div class="producto-info">
+                    <h3>Anillo de Lagarto </h3>
+                    <p>Un anillo en oro con un diseño de lagarto.</p>
+                    <div class="precio">1,000€</div>
+                    <a href="login.php" class="btn-login">Comprar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/Colecciones/so13073-00orclesp.jpg');"></div>
+                <div class="producto-info">
+                    <h3>Orcles</h3>
+                    <p>Anillo con una gran piedra preciosa en la parte central, destacando su color naranja vivo.</p>
+                    <div class="precio">500€</div>
+                    <a href="login.php" class="btn-login">Comprar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/Colecciones/so15009-ob.jpg');"></div>
+                <div class="producto-info">
+                    <h3>Anillo Aguamarina </h3>
+                    <p>Anillo alucivo al calido ambiente del mar y el agua con diseños en plata de alta calidad </p>
+                    <div class="precio">60€</div>
+                <a href="login.php" class="btn-login">Comprar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/Colecciones/so15029-trr.jpg');"></div>
+                <div class="producto-info">
+                    <h3>Anillo en oro blanco</h3>
+                    <p>Anillo en oro de 18 kilates con rubí Mujer </p>
+                    <div class="precio">5000€</div>
+                    <a href="login.php" class="btn-login">Comprar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/Colecciones/thesfc_15004.jpg');"></div>
+                <div class="producto-info">
+                    <h3>Collar de Perlas</h3>
+                    <p>Un estilo clasico pero jamas menos elegante</p>
+                    <div class="precio">1000€</div>
+                   <a href="login.php" class="btn-login">Comprar</a>
+                </div>
+            </div>
+        </section>
+
+        <footer id="footer">
+            <p>© 2023 Joyeras Suárez. Todos los derechos reservados.</p>
+            <p><a href="#">Política de privacidad</a> | <a href="#">Términos y condiciones</a></p>
+        </footer>
+    </div>
+
+    <!-- JavaScript del carrito -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elementos del DOM
+            const btnCarrito = document.querySelector('.btn-carrito');
+            const carritoContainer = document.querySelector('.carrito-container');
+            const overlay = document.querySelector('.overlay');
+            const cerrarCarrito = document.querySelector('.cerrar-carrito');
+            const carritoItems = document.getElementById('carrito-items');
+            const carritoTotal = document.getElementById('carrito-total');
+            const contadorCarrito = document.querySelector('.carrito-contador');
+            const btnVaciar = document.getElementById('vaciar-carrito');
+            
+            // Inicializar carrito desde localStorage o crear uno vacío
+            let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+            // Mostrar/ocultar carrito
+            function toggleCarrito() {
+                carritoContainer.classList.toggle('abierto');
+                overlay.classList.toggle('visible');
+            }
+
+            // Actualizar carrito en la UI
+            function actualizarCarrito() {
+                // Limpiar carrito
+                carritoItems.innerHTML = '';
+
+                // Actualizar items
+                let total = 0;
+                let totalItems = 0;
+
+                carrito.forEach(item => {
+                    total += item.precio * item.cantidad;
+                    totalItems += item.cantidad;
+
+                    const itemHTML = document.createElement('div');
+                    itemHTML.classList.add('carrito-item');
+                    itemHTML.innerHTML = `
+                        <div class="carrito-item-img" style="background-image: url('${item.imagen}')"></div>
+                        <div class="carrito-item-info">
+                            <h4 class="carrito-item-titulo">${item.nombre}</h4>
+                            <p class="carrito-item-precio">${item.precio.toLocaleString()}€</p>
+                            <div class="carrito-item-cantidad">
+                                <button class="disminuir" data-id="${item.id}">-</button>
+                                <input type="number" value="${item.cantidad}" min="1" data-id="${item.id}">
+                                <button class="aumentar" data-id="${item.id}">+</button>
+                            </div>
+                            <button class="eliminar-item" data-id="${item.id}">Eliminar</button>
+                        </div>
+                    `;
+                    carritoItems.appendChild(itemHTML);
+                });
+
+                // Actualizar total
+                carritoTotal.textContent = total.toLocaleString();
+                contadorCarrito.textContent = totalItems;
+
+                // Eventos para los botones de cantidad y eliminar
+                document.querySelectorAll('.disminuir').forEach(btn => {
+                    btn.addEventListener('click', disminuirCantidad);
+                });
+
+                document.querySelectorAll('.aumentar').forEach(btn => {
+                    btn.addEventListener('click', aumentarCantidad);
+                });
+
+                document.querySelectorAll('.carrito-item-cantidad input').forEach(input => {
+                    input.addEventListener('change', cambiarCantidad);
+                });
+
+                document.querySelectorAll('.eliminar-item').forEach(btn => {
+                    btn.addEventListener('click', eliminarItem);
+                });
+            }
+
+            // Funciones para manejar el carrito
+            function disminuirCantidad(e) {
+                const id = e.target.getAttribute('data-id');
+                const item = carrito.find(item => item.id === id);
+                
+                if (item.cantidad > 1) {
+                    item.cantidad--;
+                } else {
+                    eliminarItem(e);
+                    return;
+                }
+                
+                guardarCarrito();
+            }
+
+            function aumentarCantidad(e) {
+                const id = e.target.getAttribute('data-id');
+                const item = carrito.find(item => item.id === id);
+                item.cantidad++;
+                guardarCarrito();
+            }
+
+            function cambiarCantidad(e) {
+                const id = e.target.getAttribute('data-id');
+                const nuevaCantidad = parseInt(e.target.value);
+                
+                if (nuevaCantidad < 1) {
+                    e.target.value = 1;
+                    return;
+                }
+                
+                const item = carrito.find(item => item.id === id);
+                item.cantidad = nuevaCantidad;
+                guardarCarrito();
+            }
+
+            function eliminarItem(e) {
+                const id = e.target.getAttribute('data-id');
+                const index = carrito.findIndex(item => item.id === id);
+                
+                if (index !== -1) {
+                    carrito.splice(index, 1);
+                    guardarCarrito();
+                }
+            }
+
+            function vaciarCarrito() {
+                carrito = [];
+                guardarCarrito();
+                mostrarNotificacion('Carrito vaciado');
+            }
+
+            function guardarCarrito() {
+                localStorage.setItem('carrito', JSON.stringify(carrito));
+                actualizarCarrito();
+            }
+
+            function mostrarNotificacion(mensaje) {
+                const notificacion = document.createElement('div');
+                notificacion.className = 'notificacion-carrito';
+                notificacion.textContent = mensaje;
+                document.body.appendChild(notificacion);
+                
+                setTimeout(() => {
+                    notificacion.classList.add('mostrar');
+                    setTimeout(() => {
+                        notificacion.classList.remove('mostrar');
+                        setTimeout(() => {
+                            document.body.removeChild(notificacion);
+                        }, 500);
+                    }, 3000);
+                }, 100);
+            }
+
+            // Función global para agregar productos
+            window.agregarAlCarrito = function(id, nombre, precio, imagen) {
+                const productoExistente = carrito.find(item => item.id === id);
+
+                if (productoExistente) {
+                    productoExistente.cantidad++;
+                } else {
+                    carrito.push({
+                        id,
+                        nombre,
+                        precio: parseFloat(precio),
+                        imagen,
+                        cantidad: 1
+                    });
+                }
+
+                guardarCarrito();
+                mostrarNotificacion(`${nombre} añadido al carrito`);
+            };
+
+            // Event listeners
+            if (btnCarrito) btnCarrito.addEventListener('click', toggleCarrito);
+            if (cerrarCarrito) cerrarCarrito.addEventListener('click', toggleCarrito);
+            if (overlay) overlay.addEventListener('click', toggleCarrito);
+            if (btnVaciar) btnVaciar.addEventListener('click', vaciarCarrito);
+
+            // Inicializar
+            actualizarCarrito();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joyerias Suárez - Nuestra Historia</title>
+    <link rel="stylesheet" href="estilos.css">
+    <style>
+        .timeline {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        
+        .timeline-event {
+            display: flex;
+            margin-bottom: 50px;
+            align-items: center;
+            background: #FAF0E6;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .event-year {
+            background: #B8860B;
+            color: #000;
+            padding: 15px;
+            min-width: 120px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        .event-content {
+            padding: 20px;
+            flex: 1;
+        }
+        
+        .event-content h3 {
+            color: #A0522D;
+            margin-top: 0;
+        }
+        
+        .event-image {
+            width: 250px;
+            height: 200px;
+            object-fit: cover;
+            border-left: 3px solid #DAA520;
+        }
+        
+        .intro-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('Historia/1.png');
+            background-size: cover;
+            color: #FFF;
+            text-align: center;
+            padding: 100px 20px;
+            margin-bottom: 40px;
+        }
+        
+        .intro-section h2 {
+            font-size: 2.5em;
+            color: #DAA520;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <header id="header">
+            <div class="logo">
+                <h1>Joyerias Suárez</h1>
+                <h2>Alta Joyería desde 1950</h2>
+            </div>
+            <nav id="menu">
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="Productos.html">Colecciones</a></li>
+                    <li><a href="AboutUs.html" class="active">Sobre Nosotros</a></li>
+                    <li><a href="sucursales.html">Sucursales</a></li>
+                    <li class="auth-buttons">
+                        <a href="login.php" class="btn-login">Iniciar Sesión</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <section class="intro-section">
+            <h2>Nuestra Historia</h2>
+            <p>Un legado de excelencia en joyería desde 1943</p>
+        </section>
+
+        <!-- Línea de tiempo -->
+        <section class="timeline">
+
+            <div class="timeline-event">
+                <div class="event-year">Fundador</div>
+                <div class="event-content">
+                    <h3>EMILIANO SUÁREZ FAFFIÁN</h3>
+                    <p>D. Emiliano Suárez Faffián introdujo un gran avance en el gremio de joyeros fundando en Bilbao la primera tienda-taller de joyería, origen de lo que es hoy Grupo Suárez.</p>
+                </div>
+                <img src="Historia/1.png" alt="Fundador" class="event-image">
+            </div>
+
+            <!-- 1943: Fundación -->
+            <div class="timeline-event">
+                <div class="event-year">1943</div>
+                <div class="event-content">
+                    <h3>Fundación de Joyería Suárez (Bilbao, Calle Jardines 11)</h3>
+                    <p>Era una pequeña tienda de unos 20 metros cuadrados que puso en marcha el proyecto de la familia Suárez.</p>
+                </div>
+                <img src="Historia/2.png" alt="Primera tienda en Bilbao" class="event-image">
+            </div>
+
+            <!-- 1974: Transición familiar -->
+            <div class="timeline-event">
+                <div class="event-year">1974</div>
+                <div class="event-content">
+                    <h3>Fallecen en accidente el señor Suárez y su esposa Sara.</h3>
+                    <p>Los jóvenes hermanos Benito y Emiliano adquieren toda la responsabilidad del negocio familiar.</p>
+                </div>
+                <img src="Historia/3.png" alt="Hermanos Suárez" class="event-image">
+            </div>
+
+            <div class="timeline-event">
+                <div class="event-year">1975</div>
+                <div class="event-content">
+                    <h3>Inauguración de la segunda tienda (Bilbao, Calle Ercilla 25)</h3>
+                    <p>Los hermanos Suárez comienzan su expansión en Bilbao inaugurando la nueva tienda en la calle Ercilla 25.</p>
+                </div>
+                <img src="Historia/4.png" alt="Segunda Tienda" class="event-image">
+            </div>
+
+            <div class="timeline-event">
+                <div class="event-year">1978</div>
+                <div class="event-content">
+                    <h3>Inauguración tienda (Bilbao, Calle Correo, 21)</h3>
+                    <p>Los hermanos Suárez deciden cerrar la primera tienda que fundó su padre para poner en marcha un nuevo proyecto.</p>
+                </div>
+                <img src="Historia/5.png" alt="Tienda Bilbao" class="event-image">
+            </div>
+
+            <!-- 1982: Expansión a Madrid -->
+            <div class="timeline-event">
+                <div class="event-year">1982</div>
+                <div class="event-content">
+                    <h3>Apertura de la primera tienda en Madrid. (Madrid, Calle Serrano, 63).</h3>
+                    <p>Los hermanos Suárez extienden su proyecto a Madrid inaugurando una tienda en la calle Serrano 63.</p>
+                </div>
+                <img src="Historia/6.png" alt="Tienda Serrano 63" class="event-image">
+            </div>
+
+            <div class="timeline-event">
+                <div class="event-year">1983</div>
+                <div class="event-content">
+                    <h3>Inundaciones en Bilbao.</h3>
+                    <p>Las inundaciones en Bilbao causaron graves e irreparables daños en las tiendas, que se pudieron superar gracias a la capacidad de trabajo y superación de todo el equipo Suárez.</p>
+                </div>
+                <img src="Historia/7.png" alt="Inundacion" class="event-image">
+            </div>
+
+
+            <div class="timeline-event">
+                <div class="event-year">1985</div>
+                <div class="event-content">
+                    <h3>Apertura tienda Bilbao (Bilbao, Calle Gran Vía 43)</h3>
+                    <p>Se decide cerrar las tiendas de Ercilla y Correo para trasladarse a una gran tienda localizada en los bajos del emblemático edificio Sota, en la Gran Vía 43 de Bilbao.</p>
+                </div>
+                <img src="Historia/8.png" alt="Tienda Bilbao2" class="event-image">
+            </div>
+
+            <!-- 1992: Sofía de Habsburgo -->
+            <div class="timeline-event">
+                <div class="event-year">1992</div>
+                <div class="event-content">
+                    <h3>Sofía de Habsburgo</h3>
+                    <p>Archiduquesa de Austria y amiga de la familia Suárez, Sofía de Habsburgo fue una de las primeras embajadoras de la marca.</p>
+                </div>
+                <img src="Historia/9.png" alt="Sofía de Habsburgo" class="event-image">
+            </div>
+
+            <div class="timeline-event">
+                <div class="event-year">1997</div>
+                <div class="event-content">
+                    <h3>Ampliación de la tienda Serrano 63 (Madrid, Calle Serrano 63)</h3>
+                    <p>Se reforma la tienda de Serrano 63 y la firma Patek Philippe la escoge para montar su primer ‘Shop in Shop’ en el mundo.</p>
+                </div>
+                <img src="Historia/10.png" alt="Ampliasion Serrano63" class="event-image">
+            </div>
+
+            <div class="timeline-event">
+                <div class="event-year">1999</div>
+                <div class="event-content">
+                    <h3>Ampliación de la tienda Serrano 62 (Madrid, Calle Serrano 62)</h3>
+                    <p>El grupo Suárez amplía de una forma espectacular sus instalaciones de la calle Serrano 62, convirtiéndose en una de las joyerías más grandes de Europa.</p>
+                </div>
+                <img src="Historia/11.png" alt="Ampliasion Serrano62" class="event-image">
+            </div>
+
+            <div class="timeline-event">
+                <div class="event-year">2000</div>
+                <div class="event-content">
+                    <h3>Sautoirs de Perlas</h3>
+                    <p>Suárez introduce en el mercado los sautoirs de perlas, collares maxis de perlas australianas, Tahití y Golden que dan un giro a la forma de lucir las perlas hasta el momento.</p>
+                </div>
+                <img src="Historia/12.png" alt="Ampliasion Serrano62" class="event-image">
+            </div>
+
+
+            <!-- 2003: Apertura en Barcelona -->
+            <div class="timeline-event">
+                <div class="event-year">2003</div>
+                <div class="event-content">
+                    <h3>Llegada a Barcelona</h3>
+                    <p>Inauguración de la boutique en Paseo de Gracia 82, con una fachada de 34 metros y más de 800 m² dedicados a las mejores marcas de relojería y joyas.</p>
+                </div>
+                <img src="Historia/13.png" alt="Boutique Barcelona" class="event-image">
+            </div>
+
+            <div class="timeline-event">
+                <div class="event-year">2004</div>
+                <div class="event-content">
+                    <h3>Príncipes de Asturias</h3>
+                    <p>Suárez tuyo el honor de ser la joyería elegida por SS.AA.RR los Príncipes de Asturias para comprar sus joyas de compromiso.</p>
+                </div>
+                <img src="Historia/14.png" alt="Boutique Barcelona" class="event-image">
+            </div>
+
+            <!-- 2008: Colección ONE -->
+            <div class="timeline-event">
+                <div class="event-year">2008</div>
+                <div class="event-content">
+                    <h3>Colección Solidaria</h3>
+                    <p>Lanzamiento de la Colección ONE, un proyecto con la Fundación Aladina para apoyar a niños con cáncer. Parte de las ventas se destinan a esta causa.</p>
+                </div>
+                <img src="Historia/15.png" alt="Colección ONE" class="event-image">
+            </div>
+
+            <div class="timeline-event">
+                <div class="event-year">2010</div>
+                <div class="event-content">
+                    <h3>El Corte Inglés (Madrid, Calle Serrano 47 y Castellana, Raimundo Fernández Villaverde 79).</h3>
+                    <p>Apertura de puntos de venta en el Corte Inglés de Serrano y Castellana.</p>
+                </div>
+                <img src="Historia/16.png" alt="CorteIngles" class="event-image">
+            </div>
+
+            <div class="timeline-event">
+                <div class="event-year">2011</div>
+                <div class="event-content">
+                    <h3>El Corte Inglés (Barcelona, Valencia, Zaragoza, Murcia, Bilbao, Madrid Pozuelo y Sevilla)</h3>
+                    <p>Apertura de varios puntos de venta en El Corte Inglés en diferentes ciudades.</p>
+                </div>
+                <img src="Historia/17.png" alt="CorteIngles BVZMBMPS" class="event-image">
+            </div>
+
+            <div class="timeline-event">
+                <div class="event-year">2012</div>
+                <div class="event-content">
+                    <h3>Campaña Mario Testino Laetitia Casta</h3>
+                    <p>Mario Testino se convierte en el fotógrafo de la nueva campaña de Suárez protagonizada por la actriz y modelo Laetitia Casta.</p>
+                </div>
+                <img src="Historia/18.png" alt="Campaña Mario Testino" class="event-image">
+            </div>
+
+            <div class="timeline-event">
+                <div class="event-year">2013</div>
+                <div class="event-content">
+                    <h3>Celebración del X Aniversario de la boutique de Barcelona.</h3>
+                    <p>La boutique de Paseo de Gracia de Barcelona celebró su X Aniversario en compañía de sus clientes.</p>
+                </div>
+                <img src="Historia/19.png" alt="X Aniversario" class="event-image">
+            </div>
+
+            <div class="timeline-event">
+                <div class="event-year">2014</div>
+                <div class="event-content">
+                    <h3>Lanzamiento del reloj IMANTE. La joya del tiempo.</h3>
+                    <p>Presentación de IMANTE, el primer reloj femenino de Suárez.</p>
+                </div>
+                <img src="Historia/20.png" alt="Campaña Mario Testino" class="event-image">
+            </div>
+
+            <!-- 2015: Nuevo concepto de tienda -->
+            <div class="timeline-event">
+                <div class="event-year">2015</div>
+                <div class="event-content">
+                    <h3>Nuevo concepto tienda</h3>
+                    <p>Tras la presentación del proyecto en un concurso entre varios arquitectos internacionales del más alto nivel, Suárez selecciona el proyecto de un prestigioso estudio parisino y comienza su ejecución bajo la dirección del estudio G4 basado en Barcelona y liderado por el arquitecto Ernest Boronat. Un nuevo concepto de tienda basado en espacios abiertos donde la luz y materiales como la rafia, el cuero y latón son los protagonistas.</p>
+                </div>
+                <img src="Historia/21.png" alt="Nuevo concepto de tienda" class="event-image">
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer id="footer">
+            <p>© 2023 Joyeras Suárez. Todos los derechos reservados.</p>
+            <p><a href="#">Política de privacidad</a> | <a href="#">Términos y condiciones</a></p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joyeras Suárez - Joyas </title>
+    <link rel="stylesheet" href="estilos.css">
+    <script src="carrito.js"></script>
+    <style>
+        /* Estilos específicos */
+        .productos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            padding: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .producto {
+            background: #FAF0E6;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .producto:hover {
+            transform: translateY(-5px);
+        }
+        
+        .producto-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .producto-info {
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .producto-info h3 {
+            color: #A0522D;
+            margin: 0;
+        }
+        
+        .producto-info .precio {
+            color: #B8860B;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .btn-comprar {
+            background: #DAA520;
+            color: #000;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            transition: background 0.3s;
+        }
+        
+        .btn-comprar:hover {
+            background: #FFD700;
+        }
+        
+        .banner-categoria {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('Productos/Joyas/pe13044-agqzci.jpg');
+            background-size: cover;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFF;
+            text-align: center;
+        }
+        
+        .banner-categoria h2 {
+            font-size: 3em;
+            color: #DAA520;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <header id="header">
+            <div class="logo">
+                <h1>Joyeras Suárez</h1>
+                <h2>Alta Joyería desde 1950</h2>
+            </div>
+            <nav id="menu">
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="Productos.html">Colecciones</a></li>
+                    <li><a href="AboutUs.html">Sobre Nosotros</a></li>
+                    <li><a href="sucursales.html">Sucursales</a></li>
+                    <li class="auth-buttons">
+                        <a href="login.php" class="btn-login">Iniciar Sesión</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <section class="banner-categoria">
+            <div>
+                <h2>Joyas</h2>
+                <p>Elegancia y distinción en cada pieza</p>
+            </div>
+        </section>
+
+        <section class="productos-grid">
+            <!-- Producto 1 -->
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/Joyas/GE11001-00AG.jpg');"></div>
+                <div class="producto-info">
+                    <h3>Gemelos de Plata</h3>
+                    <p>Alta plateria y trabajo artesanal</p>
+                    <div class="precio">30€</div>
+                    <a href="login.php" class="btn-comprar">Comprar</a>
+                </div>
+            </div>
+
+            <!-- Producto 2 -->
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/Joyas/pe12060-pb6mm.jpg');"></div>
+                <div class="producto-info">
+                    <h3>Juego de Perlas</h3>
+                    <p>Perlas australianas con cierre dorado.</p>
+                    <div class="precio">70€</div>
+                    <a href="login.php" class="btn-comprar">Comprar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/Joyas/pe12060-tq5mm.jpg');"></div>
+                <div class="producto-info">
+                    <h3>Juego de Perlas Azules</h3>
+                    <p>Perlas australianas con cierre dorado.</p>
+                    <div class="precio">80€</div>
+                    <a href="login.php" class="btn-comprar">Comprar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/Joyas/pe13044-agqzci.jpg');"></div>
+                <div class="producto-info">
+                    <h3>Orecchini in resina</h3>
+                    <p>Joyas de alta calidad y atractivas a la vista.</p>
+                    <div class="precio">4000€</div>
+                    <a href="login.php" class="btn-comprar">Comprar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/Joyas/pe13078-ag.jpg');"></div>
+                <div class="producto-info">
+                    <h3>Onyx en resina</h3>
+                    <p>Pendientes en color negro elegantes y unicos en su clase.</p>
+                    <div class="precio">300€</div>
+                    <a href="login.php" class="btn-comprar">Comprar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/Joyas/pe13083-agamv.jpg');"></div>
+                <div class="producto-info">
+                    <h3>Colgantes de Argolla en plata</h3>
+                    <p>Con ley de .95 plata de la mejor calidad con un acuademar hermoso.</p>
+                    <div class="precio">100€</div>
+                    <a href="login.php" class="btn-comprar">Comprar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/Joyas/pe14002-agtp_1.jpg');"></div>
+                <div class="producto-info">
+                    <h3>Pendientes azules Rey</h3>
+                    <p>Con un diseño elegante e incomparable en su clase.</p>
+                    <div class="precio">600€</div>
+                    <a href="login.php" class="btn-comprar">Comprar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/Joyas/pu10001-00c-t.jpg');"></div>
+                <div class="producto-info">
+                    <h3>Pulsera con detalles en plata</h3>
+                    <p>Con plata de la mas altacalidad y un acabado elegante es una de nuestras mejores opciones.</p>
+                    <div class="precio">50€</div>
+                    <a href="login.php" class="btn-comprar">Comprar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/Joyas/PU10027-00AG.jpg');"></div>
+                <div class="producto-info">
+                    <h3>Arete de moda en Plata</h3>
+                    <p>Discreto y minimalista, funcional y elegante, lo tiene todo.</p>
+                    <div class="precio">100€</div>
+                    <a href="login.php" class="btn-comprar">Comprar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/Joyas/PU10042-THColorGranate.jpg');"></div>
+                <div class="producto-info">
+                    <h3>Pulsera de cuerda</h3>
+                    <p>Pulsera discreta de cuerda con un opalo de alta calidad.</p>
+                    <div class="precio">400€</div>
+                    <a href="login.php" class="btn-comprar">Comprar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/Joyas/SO11172-00AG.jpg');"></div>
+                <div class="producto-info">
+                    <h3>Par de Anillos de Plata</h3>
+                    <p>Brillantes y Elegantes son dos adjetivos perfectos para este par de anillos.</p>
+                    <div class="precio">50€</div>
+                    <a href="login.php" class="btn-comprar">Comprar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/Joyas/so13027-agam.jpg');"></div>
+                <div class="producto-info">
+                    <h3>Amatista</h3>
+                    <p>Una piedra preciosa de una gama no para cualquiera.</p>
+                    <div class="precio">500€</div>
+                    <a href="login.php" class="btn-comprar">Comprar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/Joyas/so13070-00agamv.png');"></div>
+                <div class="producto-info">
+                    <h3>Esmeralda</h3>
+                    <p>Anillo de plata con una piedra de esmeralda en la cima.</p>
+                    <div class="precio">300€</div>
+                    <a href="login.php" class="btn-comprar">Comprar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/Joyas/so13097_st.jpg');"></div>
+                <div class="producto-info">
+                    <h3>Anillo cosmico</h3>
+                    <p>Anillo con detalles en piedras de diferentes colores para una categoria alta.</p>
+                    <div class="precio">200€</div>
+                    <a href="login.php" class="btn-comprar">Comprar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/Joyas/so14005-agamv-st.jpg');"></div>
+                <div class="producto-info">
+                    <h3>Anillo con diamante tintado</h3>
+                    <p>Un diamante unico en su especie, raro de encontrar y muy valioso.</p>
+                    <div class="precio">500€</div>
+                    <a href="login.php" class="btn-comprar">Comprar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/Joyas/so14007-ag-st.jpg');"></div>
+                <div class="producto-info">
+                    <h3>Anillo Combinado</h3>
+                    <p>Aleasion de titanio y plata para un acabado brillante.</p>
+                    <div class="precio">10000€</div>
+                    <a href="login.php" class="btn-comprar">Comprar</a>
+                </div>
+            </div>
+
+            <div class="producto">
+                <div class="producto-img" style="background-image: url('Productos/Joyas/SO14009-00AG.jpg');"></div>
+                <div class="producto-info">
+                    <h3>Plata Cubana</h3>
+                    <p>Un anillo unico en su especie, por su trensado y sus valiosos materiales.</p>
+                    <div class="precio">50€</div>
+                    <a href="login.php" class="btn-comprar">Comprar</a>
+                </div>
+            </div>
+
+        </section>
+
+        <footer id="footer">
+            <p>© 2023 Joyeras Suárez. Todos los derechos reservados.</p>
+            <p><a href="login.php">Política de privacidad</a> | <a href="login.php">Términos y condiciones</a></p>
+        </footer>
+    </div>
+</body>
+</html>
