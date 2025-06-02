@@ -465,6 +465,13 @@ $clientes = $mysql->ExecuteQuery("SELECT idcliente, CONCAT(nombre, ' ', apellido
                         <label>Contraseña:</label>
                         <input type="password" name="clave" required>
                     </div>
+                    <div class="form-group">
+                <label>Rol:</label>
+                <select name="rol" required>
+                    <option value="admin">Administrador</option>
+                    <option value="cliente">Cliente</option>
+                </select>
+            </div>
                 </div>
                 
                 <button type="submit" class="btn-submit">Crear Usuario</button>

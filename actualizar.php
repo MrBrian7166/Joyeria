@@ -76,6 +76,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $value = md5($value);
             }
 
+            // Validación especial para campo 'activo'
+            if ($field === 'activo') {
+                $value = ($value == 1) ? 1 : 0;
+            }
+
             $updateFields[] = "$field = ?";
             $params[] = $value;
             $types .= is_numeric($value) ? 'i' : 's';
@@ -197,6 +202,12 @@ $clientes = $mysql->ExecuteQuery("SELECT idcliente, CONCAT(nombre, ' ', apellido
             max-width: 200px;
             max-height: 200px;
         }
+        
+        /* Estilo específico para el campo activo */
+        select[name="activo"] {
+            background: white;
+            color: #333;
+        }
     </style>
 </head>
 <body>
@@ -268,6 +279,12 @@ $clientes = $mysql->ExecuteQuery("SELECT idcliente, CONCAT(nombre, ' ', apellido
                                     <img src="data:image/jpeg;base64,<?= base64_encode($value) ?>" class="image-preview">
                                 </div>
                             <?php endif; ?>
+
+                        <?php elseif ($field === 'activo'): ?>
+                            <select name="activo" required>
+                                <option value="1" <?= $value == 1 ? 'selected' : '' ?>>Activo (1)</option>
+                                <option value="0" <?= $value == 0 ? 'selected' : '' ?>>Inactivo (0)</option>
+                            </select>
 
                         <?php else: ?>
                             <input type="<?= is_numeric($value) ? 'number' : 'text' ?>" 
