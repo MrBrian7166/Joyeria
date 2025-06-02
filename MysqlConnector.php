@@ -9,7 +9,7 @@
 
 		function __construct()
 		{
-			$this->server = "bdatos";
+			$this->server = "localhost";
 			$this->connUser = "root";
 			$this->connPassword = "root";
 			$this->connDb = "Joyeria";
