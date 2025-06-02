@@ -91,13 +91,13 @@ if (!isset($_SESSION['user'])) {
                 <!-- Crear -->
                 <a href="crear.php" class="crud-btn">
                     <i class="fas fa-plus-circle"></i>
-                    <h3>Crear Artículo</h3>
+                    <h3>Crear</h3>
                 </a>
                 
                 <!-- Leer/Consultar -->
                 <a href="consultar.php" class="crud-btn">
                     <i class="fas fa-search"></i>
-                    <h3>Consultar Artículos</h3>
+                    <h3>Consultar </h3>
                 </a>
             </div>
 
@@ -105,13 +105,13 @@ if (!isset($_SESSION['user'])) {
                 <!-- Botón Actualizar (ejemplo con parámetros) -->
                 <a href="consultar.php?table=articulos" class="crud-btn">
                     <i class="fas fa-edit"></i>
-                    <h3>Editar Artículos</h3>
+                    <h3>Editar</h3>
                 </a>
                 
                 <!-- Botón Borrar (ejemplo con parámetros) -->
                 <a href="consultar.php?table=articulos" class="crud-btn">
                     <i class="fas fa-trash-alt"></i>
-                    <h3>Deshabilitar Artículo</h3>
+                    <h3>Deshabilitar</h3>
                 </a>
 
                 <a href="reportes.php" class="crud-btn">

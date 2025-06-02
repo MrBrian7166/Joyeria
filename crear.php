@@ -233,7 +233,7 @@ $clientes = $mysql->ExecuteQuery("SELECT idcliente, CONCAT(nombre, ' ', apellido
                     
                     <div class="form-group">
                         <label>Código Postal:</label>
-                        <input type="text" name="codigo_postal" required>
+                        <input type="number" name="codigo_postal" required>
                     </div>
                     
                     <div class="form-group">

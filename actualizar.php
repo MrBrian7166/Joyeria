@@ -10,23 +10,40 @@ $mysql = new MysqlConnector();
 $mysql->Connect();
 
 $allowedTables = [
-    'tiendas', 'articulos', 'linea_de_articulos', 
-    'existencias', 'cliente', 'ventas', 'seguridad'
+    'tiendas' => 'id_tienda',
+    'articulos' => 'id_articulo',
+    'linea_de_articulos' => 'idlinea',
+    'existencias' => 'id_existencia',
+    'cliente' => 'idcliente',
+    'ventas' => 'folio',
+    'seguridad' => 'id_seguridad'
 ];
 
 $table = $_GET['table'] ?? '';
 $id = $_GET['id'] ?? 0;
 
-if (!in_array($table, $allowedTables) || empty($id)) {
+if (!array_key_exists($table, $allowedTables) || empty($id)) {
     die("Parámetros inválidos");
 }
 
-$primaryKey = $table === 'seguridad' ? 'id_seguridad' : 'id_' . substr($table, 0, -1);
+$primaryKey = $allowedTables[$table];
 $query = "SELECT * FROM $table WHERE $primaryKey = ?";
-$stmt = $mysql->connection->prepare($query);
-$stmt->bind_param("i", $id);
-$stmt->execute();
-$currentData = $stmt->get_result()->fetch_assoc();
+
+// Preparamos la consulta con mejor manejo de errores
+if (!$stmt = $mysql->connection->prepare($query)) {
+    die("Error al preparar la consulta: " . $mysql->connection->error);
+}
+
+if (!$stmt->bind_param("i", $id)) {
+    die("Error al vincular parámetros: " . $stmt->error);
+}
+
+if (!$stmt->execute()) {
+    die("Error al ejecutar la consulta: " . $stmt->error);
+}
+
+$result = $stmt->get_result();
+$currentData = $result->fetch_assoc();
 
 if (!$currentData) {
     die("Registro no encontrado");
@@ -39,14 +56,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     // Procesar imagen si es un artículo
     if ($table === 'articulos' && isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
-        // Validar tipo de imagen
         $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
         $fileType = $_FILES['imagen']['type'];
         
         if (!in_array($fileType, $allowedTypes)) {
             $error = "Tipo de archivo no permitido. Solo se aceptan JPEG, PNG y GIF.";
         } else {
-            // Leer el contenido de la imagen
             $imagen = file_get_contents($_FILES['imagen']['tmp_name']);
             $updateFields[] = "imagen = ?";
             $params[] = $imagen;
@@ -56,12 +71,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     foreach ($_POST as $field => $value) {
         if ($field !== 'table' && $field !== 'id' && array_key_exists($field, $currentData)) {
-            // Si estamos actualizando el campo 'clave' de la tabla seguridad
             if ($field === 'clave' && $table === 'seguridad') {
-                if (trim($value) === '') {
-                    continue; // Si está vacío, no lo actualizamos
-                }
-                $value = md5($value); // Hashear la nueva clave
+                if (trim($value) === '') continue;
+                $value = md5($value);
             }
 
             $updateFields[] = "$field = ?";
@@ -75,18 +87,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $params[] = $id;
         $types .= 'i';
         
-        $stmt = $mysql->connection->prepare($query);
-        $stmt->bind_param($types, ...$params);
+        if (!$stmt = $mysql->connection->prepare($query)) {
+            die("Error al preparar la actualización: " . $mysql->connection->error);
+        }
+        
+        if (!$stmt->bind_param($types, ...$params)) {
+            die("Error al vincular parámetros: " . $stmt->error);
+        }
         
         if ($stmt->execute()) {
             $success = "Registro actualizado correctamente";
-            // Actualizar $currentData para mostrar los cambios
             $currentData = array_merge($currentData, $_POST);
             
-            // Si se actualizó la imagen, actualizar el dato local
             if ($table === 'articulos' && isset($imagen)) {
                 $currentData['imagen'] = $imagen;
             }
+            
+            // Actualizar los datos mostrados
+            $query = "SELECT * FROM $table WHERE $primaryKey = ?";
+            $stmt = $mysql->connection->prepare($query);
+            $stmt->bind_param("i", $id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $currentData = $result->fetch_assoc();
         } else {
             $error = "Error al actualizar: " . $stmt->error;
         }
@@ -206,19 +229,32 @@ $clientes = $mysql->ExecuteQuery("SELECT idcliente, CONCAT(nombre, ' ', apellido
                                         <?= $linea['descripcion'] ?>
                                     </option>
                                 <?php endwhile; ?>
+                                <?php mysqli_data_seek($lineas, 0); ?>
                             </select>
 
-                        <?php elseif (($field === 'id_articulo' || $field === 'id_tienda' || $field === 'idcliente') && in_array($table, ['existencias', 'ventas'])): ?>
+                        <?php elseif (($field === 'id_articulo' && $table === 'existencias') || ($field === 'id_tienda' && $table === 'existencias')): ?>
                             <select name="<?= $field ?>" required>
                                 <?php 
-                                $data = ${str_replace('id_', '', $field) . 's'};
+                                $data = $field === 'id_articulo' ? $articulos : $tiendas;
                                 mysqli_data_seek($data, 0);
                                 ?>
                                 <?php while ($item = mysqli_fetch_assoc($data)): ?>
                                     <option value="<?= $item[$field] ?>" <?= $value == $item[$field] ? 'selected' : '' ?>>
-                                        <?= $item['descripcion'] ?? $item['nombre'] ?>
+                                        <?= $item['descripcion'] ?>
                                     </option>
                                 <?php endwhile; ?>
+                                <?php mysqli_data_seek($data, 0); ?>
+                            </select>
+
+                        <?php elseif ($field === 'idcliente' && $table === 'ventas'): ?>
+                            <select name="idcliente" required>
+                                <?php mysqli_data_seek($clientes, 0); ?>
+                                <?php while ($cliente = mysqli_fetch_assoc($clientes)): ?>
+                                    <option value="<?= $cliente['idcliente'] ?>" <?= $value == $cliente['idcliente'] ? 'selected' : '' ?>>
+                                        <?= $cliente['nombre'] ?>
+                                    </option>
+                                <?php endwhile; ?>
+                                <?php mysqli_data_seek($clientes, 0); ?>
                             </select>
 
                         <?php elseif ($field === 'clave' && $table === 'seguridad'): ?>
